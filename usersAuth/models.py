@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, nombres, apellido_pat, apellido_mat,
-                    password=None):
+                    dni, password=None):
         if not email:
             raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
@@ -13,16 +13,17 @@ class CustomUserManager(BaseUserManager):
           email=email,
           nombres=nombres,
           apellido_pat=apellido_pat,
-          apellido_mat=apellido_mat
+          apellido_mat=apellido_mat,
+          dni = dni
         )
         user.set_password(password)
         user.save()
         return user
 
     def create_superuser(self, email, nombres, apellido_pat,
-                        apellido_mat, password=None):
+                        apellido_mat, dni, password=None):
         user = self.create_user(email, nombres, apellido_pat,
-                                apellido_mat,password)
+                                apellido_mat, dni, password)
         user.is_admin = True
         user.is_staff = True
         user.save()
