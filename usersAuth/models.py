@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     est_reg = models.CharField(max_length=1, default='A')
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nombre', 'apellido_pat', 'apellido_mat'
+    REQUIRED_FIELDS = ['nombres', 'apellido_pat', 'apellido_mat'
                        , 'dni']
     
     objects = CustomUserManager()
